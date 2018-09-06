@@ -26,7 +26,6 @@ class CategoryController extends Controller
     public function index()
     {
         $list = $this->categoryRepo->listCategories('created_at', 'desc', 1)->whereIn('parent_id', [1]);
-dd($list);
         return view('admin.categories.list', [
             'categories' => $this->categoryRepo->paginateArrayResults($list->all())
         ]);
@@ -47,7 +46,7 @@ dd($list);
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateCategoryRequest  $request
+     * @param  CreateCategoryRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateCategoryRequest $request)
@@ -61,7 +60,7 @@ dd($list);
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,7 +79,7 @@ dd($list);
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -95,7 +94,7 @@ dd($list);
      * Update the specified resource in storage.
      *
      * @param  UpdateCategoryRequest $request
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategoryRequest $request, $id)
@@ -112,7 +111,7 @@ dd($list);
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
