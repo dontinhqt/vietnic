@@ -114,7 +114,6 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      */
     public function findCategoryById(int $id) : Category
     {
-        dd("222111");
         try {
             return $this->findOneOrFail($id);
         } catch (ModelNotFoundException $e) {
