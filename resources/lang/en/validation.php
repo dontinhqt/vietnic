@@ -87,6 +87,10 @@ return [
     'unique' => 'Trường :attribute đã có trong hệ thống.',
     'uploaded' => 'Trường :attribute không thể tải lên.',
     'url' => 'Trường :attribute không giống với định dạng một URL.',
+    'description' => 'mô tả ',
+    'quantity' => 'số lượng ',
+    'price' => 'giá thành',
+    'status' => 'tình trạng',
 
     /*
     |--------------------------------------------------------------------------
