@@ -117,12 +117,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categoryRepo->listCategories('name', 'asc')->where('parent_id', 1);
+        $categories = $this->categoryRepo->listCategories('name', 'asc');
 
         return view('admin.products.create', [
             'categories' => $categories,
             'brands' => $this->brandRepo->listBrands(['*'], 'name', 'asc'),
-            'default_weight' => env('SHOP_WEIGHT'),
             'weight_units' => Product::MASS_UNIT,
             'product' => new Product
         ]);
@@ -140,28 +139,28 @@ class ProductController extends Controller
         $data = $request->except('_token', '_method');
         $data['slug'] = str_slug($request->input('name'));
 
-        if ($request->hasFile('cover') && $request->file('cover') instanceof UploadedFile) {
-            $data['cover'] = $this->productRepo->saveCoverImage($request->file('cover'));
+        if ($request->hasFile('image') && $request->file('image') instanceof UploadedFile) {
+            $data['image'] = $this->productRepo->saveCoverImage($request->file('image'));
         }
 
         $product = $this->productRepo->createProduct($data);
 
-        $productRepo = new ProductRepository($product);
+        // $productRepo = new ProductRepository($product);
 
-        if ($request->hasFile('image')) {
-            $productRepo->saveProductImages(collect($request->file('image')));
-        }
+        // if ($request->hasFile('image')) {
+        //     $productRepo->saveProductImages(collect($request->file('image')));
+        // }
 
-        $productRepo = new ProductRepository($product);
-        if ($request->hasFile('image')) {
-            $productRepo->saveProductImages(collect($request->file('image')));
-        }
+        // $productRepo = new ProductRepository($product);
+        // if ($request->hasFile('image')) {
+        //     $productRepo->saveProductImages(collect($request->file('image')));
+        // }
 
-        if ($request->has('categories')) {
-            $productRepo->syncCategories($request->input('categories'));
-        } else {
-            $productRepo->detachCategories();
-        }
+//        if ($request->has('categories')) {
+//            $productRepo->syncCategories($request->input('categories'));
+//        } else {
+//            $productRepo->detachCategories();
+//        }
 
         return redirect()->route('admin.products.edit', $product->id)->with('message', 'Create successful');
     }
@@ -189,11 +188,6 @@ class ProductController extends Controller
     public function edit(int $id)
     {
         $product = $this->productRepo->findProductById($id);
-        $productAttributes = $product->attributes()->get();
-
-        $qty = $productAttributes->map(function ($item) {
-            return $item->quantity;
-        })->sum();
 
         if (request()->has('delete') && request()->has('pa')) {
             $pa = $productAttributes->where('id', request()->input('pa'))->first();
@@ -203,22 +197,12 @@ class ProductController extends Controller
             request()->session()->flash('message', 'Delete successful');
             return redirect()->route('admin.products.edit', [$product->id, 'combination' => 1]);
         }
-
-        $categories = $this->categoryRepo->listCategories('name', 'asc')
-            ->where('parent_id', 1);
+        $categories = $this->categoryRepo->listCategories('name', 'asc');
 
         return view('admin.products.edit', [
             'product' => $product,
-            'images' => $product->images()->get(['src']),
             'categories' => $categories,
-            'selectedIds' => $product->categories()->pluck('category_id')->all(),
-            'attributes' => $this->attributeRepo->listAttributes(),
-            'productAttributes' => $productAttributes,
-            'qty' => $qty,
-            'brands' => $this->brandRepo->listBrands(['*'], 'name', 'asc'),
-            'weight' => $product->weight,
-            'default_weight' => $product->mass_unit,
-            'weight_units' => Product::MASS_UNIT
+            'brands' => $this->brandRepo->listBrands(['*'], 'name', 'asc')
         ]);
     }
 
@@ -234,42 +218,27 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, int $id)
     {
         $product = $this->productRepo->findProductById($id);
+        dd(basename($product->image));
+        // collect(request()->segments())->last()
+        // dd(unlink($product->image));
+
+        unlink(storage_path('app/public/products/9gyH9K2Fcva5DfVYf1ZmZ4WrsMjX2wKTKqvIrjzW.jpeg'));
+        dd("done");
         $productRepo = new ProductRepository($product);
 
-        if ($request->has('attributeValue')) {
-            $this->saveProductCombinations($request, $product);
-            return redirect()->route('admin.products.edit', [$id, 'combination' => 1])
-                ->with('message', 'Attribute combination created successful');
-        }
-
         $data = $request->except(
-            'categories',
             '_token',
-            '_method',
-            'default',
-            'image',
-            'productAttributeQuantity',
-            'productAttributePrice',
-            'attributeValue',
-            'combination'
+            '_method'
         );
 
         $data['slug'] = str_slug($request->input('name'));
 
-        if ($request->hasFile('cover')) {
-            $data['cover'] = $productRepo->saveCoverImage($request->file('cover'));
-        }
-
         if ($request->hasFile('image')) {
-            $productRepo->saveProductImages(collect($request->file('image')));
-        }
+            // if ($product-) {
 
-        if ($request->has('categories')) {
-            $productRepo->syncCategories($request->input('categories'));
-        } else {
-            $productRepo->detachCategories();
+            // }
+            $data['image'] = $this->productRepo->saveCoverImage($request->file('image'));
         }
-
         $productRepo->updateProduct($data);
 
         return redirect()->route('admin.products.edit', $id)
@@ -287,15 +256,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = $this->productRepo->findProductById($id);
-        $product->categories()->sync([]);
-        $productAttr = $product->attributes();
-
-        $productAttr->each(function ($pa) {
-            DB::table('attribute_value_product_attribute')->where('product_attribute_id', $pa->id)->delete();
-        });
-
-        $productAttr->where('product_id', $product->id)->delete();
-
+        // $product->categories()->sync([]);
         $productRepo = new ProductRepository($product);
         $productRepo->removeProduct();
 

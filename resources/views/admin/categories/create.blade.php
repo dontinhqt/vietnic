@@ -11,9 +11,8 @@
                     <div class="form-group">
                         <label for="parent">Parent Category</label>
                         <select name="parent" id="parent" class="form-control select2">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
+                            <option value="0"> -- ROOT -- </option>
+                            {{ categorySelect($categories, 0, " ", old('parent')) }}
                         </select>
                     </div>
                     <div class="form-group">

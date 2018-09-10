@@ -19,9 +19,12 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->string('cover')->nullable();
+            $table->string('image')->nullable();
             $table->integer('quantity');
-            $table->decimal('price');
+            $table->float('price');
+            $table->float('sale_price');
+            $table->integer('category_id');
+            $table->integer('brand_id');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

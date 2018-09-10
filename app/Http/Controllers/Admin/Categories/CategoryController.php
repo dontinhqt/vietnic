@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $list = $this->categoryRepo->listCategories('created_at', 'desc', 1)->whereIn('parent_id', [1]);
+        $list = $this->categoryRepo->listCategories();
         return view('admin.categories.list', [
             'categories' => $this->categoryRepo->paginateArrayResults($list->all())
         ]);
@@ -38,15 +38,16 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $categories = $this->categoryRepo->listCategories('name', 'asc');
         return view('admin.categories.create', [
-            'categories' => $this->categoryRepo->listCategories('name', 'asc')
+            'categories' => $categories
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateCategoryRequest $request
+     * @param  CreateCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateCategoryRequest $request)
@@ -60,7 +61,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,7 +80,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -94,7 +95,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  UpdateCategoryRequest $request
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategoryRequest $request, $id)
@@ -111,7 +112,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
