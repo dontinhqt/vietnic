@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
-use App\Shop\Attributes\Repositories\AttributeRepositoryInterface;
-use App\Shop\AttributeValues\Repositories\AttributeValueRepositoryInterface;
 use App\Shop\Brands\Repositories\BrandRepositoryInterface;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
-use App\Shop\ProductAttributes\ProductAttribute;
-use App\Shop\Products\Exceptions\ProductInvalidArgumentException;
 use App\Shop\Products\Exceptions\ProductNotFoundException;
 use App\Shop\Products\Product;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
@@ -38,21 +34,6 @@ class ProductController extends Controller
     private $categoryRepo;
 
     /**
-     * @var AttributeRepositoryInterface
-     */
-    private $attributeRepo;
-
-    /**
-     * @var AttributeValueRepositoryInterface
-     */
-    private $attributeValueRepository;
-
-    /**
-     * @var ProductAttribute
-     */
-    private $productAttribute;
-
-    /**
      * @var BrandRepositoryInterface
      */
     private $brandRepo;
@@ -62,24 +43,15 @@ class ProductController extends Controller
      *
      * @param ProductRepositoryInterface $productRepository
      * @param CategoryRepositoryInterface $categoryRepository
-     * @param AttributeRepositoryInterface $attributeRepository
-     * @param AttributeValueRepositoryInterface $attributeValueRepository
-     * @param ProductAttribute $productAttribute
      * @param BrandRepositoryInterface $brandRepository
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         CategoryRepositoryInterface $categoryRepository,
-        AttributeRepositoryInterface $attributeRepository,
-        AttributeValueRepositoryInterface $attributeValueRepository,
-        ProductAttribute $productAttribute,
         BrandRepositoryInterface $brandRepository
     ) {
         $this->productRepo = $productRepository;
         $this->categoryRepo = $categoryRepository;
-        $this->attributeRepo = $attributeRepository;
-        $this->attributeValueRepository = $attributeValueRepository;
-        $this->productAttribute = $productAttribute;
         $this->brandRepo = $brandRepository;
 
         $this->middleware(['permission:create-product, guard:employee'], ['only' => ['create', 'store']]);
@@ -218,25 +190,16 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, int $id)
     {
         $product = $this->productRepo->findProductById($id);
-        dd(basename($product->image));
-        // collect(request()->segments())->last()
-        // dd(unlink($product->image));
-
-        unlink(storage_path('app/public/products/9gyH9K2Fcva5DfVYf1ZmZ4WrsMjX2wKTKqvIrjzW.jpeg'));
-        dd("done");
         $productRepo = new ProductRepository($product);
-
         $data = $request->except(
             '_token',
             '_method'
         );
-
         $data['slug'] = str_slug($request->input('name'));
-
         if ($request->hasFile('image')) {
-            // if ($product-) {
-
-            // }
+            if ($product->image) {
+                unlink(storage_path('app/public/products/' . basename($product->image)));
+            }
             $data['image'] = $this->productRepo->saveCoverImage($request->file('image'));
         }
         $productRepo->updateProduct($data);
@@ -259,6 +222,9 @@ class ProductController extends Controller
         // $product->categories()->sync([]);
         $productRepo = new ProductRepository($product);
         $productRepo->removeProduct();
+        if ($product->image) {
+            unlink(storage_path('app/public/products/' . basename($product->image)));
+        }
 
         return redirect()->route('admin.products.index')->with('message', 'Delete successful');
     }

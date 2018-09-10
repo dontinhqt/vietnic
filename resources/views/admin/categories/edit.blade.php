@@ -31,20 +31,6 @@
                         <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{!! $category->name ?: old('name')  !!}">
                     </div>
                     <div class="form-group">
-                        <label for="description">Description </label>
-                        <textarea class="form-control ckeditor" name="description" id="description" rows="5" placeholder="Description">{!! $category->description ?: old('description')  !!}</textarea>
-                    </div>
-                    @if(isset($category->cover))
-                    <div class="form-group">
-                        <img src="{{ asset("storage/$category->cover") }}" alt="" class="img-responsive"> <br/>
-                        <a onclick="return confirm('Are you sure?')" href="{{ route('admin.category.remove.image', ['category' => $category->id]) }}" class="btn btn-danger">Remove image?</a>
-                    </div>
-                    @endif
-                    <div class="form-group">
-                        <label for="cover">Cover </label>
-                        <input type="file" name="cover" id="cover" class="form-control">
-                    </div>
-                    <div class="form-group">
                         <label for="status">Status </label>
                         <select name="status" id="status" class="form-control">
                             <option value="0" @if($category->status == 0) selected="selected" @endif>Disable</option>

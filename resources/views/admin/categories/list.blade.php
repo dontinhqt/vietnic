@@ -13,7 +13,6 @@
                         <thead>
                             <tr>
                                 <td class="col-md-3">Name</td>
-                                <td class="col-md-3">Cover</td>
                                 <td class="col-md-3">Status</td>
                                 <td class="col-md-3">Actions</td>
                             </tr>
@@ -22,11 +21,7 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <td>
-                                    <a href="{{ route('admin.categories.show', $category->id) }}">{{ $category->name }}</a></td>
-                                <td>
-                                    @if(isset($category->cover))
-                                        <img src="{{ asset("storage/$category->cover") }}" alt="" class="img-responsive">
-                                    @endif
+                                    <a href="{{ route('admin.categories.show', $category->id) }}">{{ $category->name }}</a>
                                 </td>
                                 <td>@include('layouts.status', ['status' => $category->status])</td>
                                 <td>
