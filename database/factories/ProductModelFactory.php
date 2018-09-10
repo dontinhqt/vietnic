@@ -26,9 +26,8 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
         'description' => $this->faker->paragraph,
         'image' => $file->store('products', ['disk' => 'public']),
         'quantity' => 10,
-        'price' => 5.00,
+        'price' => 500,
         'status' => 1,
-        'weight' => 5,
-        'mass_unit' => config('shop.weight', 'gms')
+        'category_id' => 0
     ];
 });
