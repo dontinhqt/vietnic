@@ -50,21 +50,23 @@ class Product extends Model implements Buyable
     protected $fillable = [
         'sku',
         'name',
+        'slug',
         'description',
-        'cover',
+        'image',
         'quantity',
         'price',
+        'sale_price',
+        'category_id',
         'brand_id',
         'status',
         'weight',
         'mass_unit',
         'status',
-        'sale_price',
         'length',
         'width',
         'height',
         'distance_unit',
-        'slug',
+        
     ];
 
     /**
@@ -115,10 +117,10 @@ class Product extends Model implements Buyable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function images()
-    {
-        return $this->hasMany(ProductImage::class);
-    }
+    // public function images()
+    // {
+    //     return $this->hasMany(ProductImage::class);
+    // }
 
     /**
      * @param string $term

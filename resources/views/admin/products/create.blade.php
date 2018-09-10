@@ -8,7 +8,7 @@
             <form action="{{ route('admin.products.store') }}" method="post" class="form" enctype="multipart/form-data">
                 <div class="box-body">
                     {{ csrf_field() }}
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <h2>Product</h2>
                         <div class="form-group">
                             <label for="sku">SKU <span class="text-danger">*</span></label>
@@ -20,16 +20,11 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description </label>
-                            <textarea class="form-control" name="description" id="description" rows="5" placeholder="Description">{{ old('description') }}</textarea>
+                            <textarea class="form-control ckeditor" name="description" id="description" rows="5" placeholder="Description">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="cover">Cover </label>
-                            <input type="file" name="cover" id="cover" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="image">Images</label>
-                            <input type="file" name="image[]" id="image" class="form-control" multiple>
-                            <small class="text-warning">You can use ctr (cmd) to select multiple images</small>
+                            <label for="image">Image</label>
+                            <input type="file" name="image" id="image" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="quantity">Quantity <span class="text-danger">*</span></label>
@@ -38,10 +33,17 @@
                         <div class="form-group">
                             <label for="price">Price <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <span class="input-group-addon">PHP</span>
+                                <span class="input-group-addon">VND</span>
                                 <input type="text" name="price" id="price" placeholder="Price" class="form-control" value="{{ old('price') }}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="category_id">Categories <span class="text-danger">*</span></label>
+                            <select name="category_id" id="category_id" class="form-control select2">
+                                {{ categorySelect($categories, 0, " ", old('category_id')) }}
+                            </select>
+                        </div>
+
                         @if(!$brands->isEmpty())
                         <div class="form-group">
                             <label for="brand_id">Brand </label>
@@ -53,12 +55,7 @@
                             </select>
                         </div>
                         @endif
-                        @include('admin.shared.status-select', ['status' => 0])
-                        @include('admin.shared.attribute-select', [compact('default_weight')])
-                    </div>
-                    <div class="col-md-4">
-                        <h2>Categories</h2>
-                        @include('admin.shared.categories', ['categories' => $categories, 'selectedIds' => []])
+                        @include('admin.shared.status-select', ['status' => 1])
                     </div>
                 </div>
                 <!-- /.box-body -->

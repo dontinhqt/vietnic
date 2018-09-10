@@ -29,6 +29,9 @@
         "filp/whoops": "~2.0"
     },
     "autoload": {
+        "files": [
+            "app/Helpers/commons.php"
+        ],
         "classmap": [
             "database"
         ],
