@@ -6,6 +6,8 @@ use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Shop\Products\Transformations\ProductTransformable;
+use App\Shop\Products\Repositories\ProductRepository;
+use App\Shop\Products\Product;
 
 class HomeController extends Controller
 {
@@ -43,10 +45,14 @@ class HomeController extends Controller
     // }
     public function index()
     {
-        $products = $this->productRepo->listProducts();
-        dd($products); 
-
-        return view('front.index', compact('cat1', 'cat2'));
+        $list = $this->productRepo->getListProductsWithCondition();
+        $products = $list->map(function (Product $item) {
+            return $this->transformProduct($item);
+        })->all();
+        
+        return view('front.index', [
+            'products' => $products
+        ]);
     }
 
 }
