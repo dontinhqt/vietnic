@@ -17,4 +17,17 @@ class CreateCategoryRequest extends BaseFormRequest
             'name' => ['required', 'unique:categories']
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'A title is required',
+            'body.required'  => 'A message is required',
+        ];
+    }
 }

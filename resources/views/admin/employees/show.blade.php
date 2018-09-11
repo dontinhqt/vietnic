@@ -11,9 +11,9 @@
                     <tbody>
                         <tr>
                             <td class="col-md-4">ID</td>
-                            <td class="col-md-4">Name</td>
+                            <td class="col-md-4">Tên</td>
                             <td class="col-md-4">Email</td>
-                            <td class="col-md-4">Roles</td>
+                            <td class="col-md-4">Vai Trò</td>
                         </tr>
                     </tbody>
                     <tbody>
@@ -31,7 +31,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="btn-group">
-                    <a href="{{ route('admin.employees.index') }}" class="btn btn-default btn-sm">Back</a>
+                    <a href="{{ route('admin.employees.index') }}" class="btn btn-default btn-sm">Quay Lại</a>
                 </div>
             </div>
         </div>

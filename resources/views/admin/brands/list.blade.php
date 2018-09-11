@@ -11,10 +11,10 @@
                     <h2>Brands</h2>
                     <table class="table">
                         <thead>
-                            <tr>
-                                <td>Name</td>
-                                <td>Actions</td>
-                            </tr>
+                        <tr>
+                            <td>Tên HSX</td>
+                            <td>Tác Vụ</td>
+                        </tr>
                         </thead>
                         <tbody>
                         @foreach ($brands as $brand)
@@ -23,12 +23,17 @@
                                     <a href="{{ route('admin.brands.show', $brand->id) }}">{{ $brand->name }}</a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="post" class="form-horizontal">
+                                    <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="post"
+                                          class="form-horizontal">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
                                         <div class="btn-group">
-                                            <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                                            <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Delete</button>
+                                            <a href="{{ route('admin.brands.edit', $brand->id) }}"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                                            <button onclick="return confirm('Bạn muốn xoá hãng sản xuất này khỏi danh sách?')"
+                                                    type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa fa-times"></i> Xoá
+                                            </button>
                                         </div>
                                     </form>
                                 </td>
@@ -41,8 +46,9 @@
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-            @else
-            <p class="alert alert-warning">No brand created yet. <a href="{{ route('admin.brands.create') }}">Create one!</a></p>
+        @else
+            <p class="alert alert-warning">Không có HSX nào trong danh sách cả. <a
+                        href="{{ route('admin.brands.create') }}">Thêm Mới!</a></p>
         @endif
     </section>
     <!-- /.content -->

@@ -13,9 +13,9 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td class="col-md-4">Name</td>
+                                <td class="col-md-4">Tên</td>
                                 <td class="col-md-4">Email</td>
-                                <td class="col-md-4">Password</td>
+                                <td class="col-md-4">Mật Khẩu</td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -42,8 +42,8 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.dashboard') }}" class="btn btn-default btn-sm">Back</a>
-                        <button class="btn btn-success btn-sm" type="submit"> <i class="fa fa-save"></i> Save</button>
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-default btn-sm">Quay Lại</a>
+                        <button class="btn btn-success btn-sm" type="submit"> <i class="fa fa-save"></i> Lưu</button>
                     </div>
                 </div>
             </div>
