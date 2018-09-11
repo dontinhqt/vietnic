@@ -20,24 +20,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->description }}</td>
-                                <td>
-                                    @if(isset($product->cover))
-                                        <img src="{{ asset("storage/$product->cover") }}" class="img-responsive" alt="">
-                                    @endif
-                                </td>
-                                <td>{{ $product->quantity }}</td>
-                                <td>{{ config('cart.currency') }} {{ $product->price }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->description }}</td>
+                            <td>
+                                @if(isset($product->cover))
+                                    <img src="{{ asset("storage/$product->cover") }}" class="img-responsive" alt="">
+                                @endif
+                            </td>
+                            <td>{{ $product->quantity }}</td>
+                            <td>{{ config('cart.currency') }} {{ $product->price }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.products.index') }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-default btn-sm">Quay lại</a>
                     </div>
                 </div>
             </div>

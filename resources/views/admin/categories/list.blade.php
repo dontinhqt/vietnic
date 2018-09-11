@@ -11,11 +11,11 @@
                     <h2>Categories</h2>
                     <table class="table">
                         <thead>
-                            <tr>
-                                <td class="col-md-3">Name</td>
-                                <td class="col-md-3">Status</td>
-                                <td class="col-md-3">Actions</td>
-                            </tr>
+                        <tr>
+                            <td class="col-md-3">Tên Danh Mục</td>
+                            <td class="col-md-3">Tình Trạng</td>
+                            <td class="col-md-3">Tác Vụ</td>
+                        </tr>
                         </thead>
                         <tbody>
                         @foreach ($categories as $category)
@@ -25,12 +25,17 @@
                                 </td>
                                 <td>@include('layouts.status', ['status' => $category->status])</td>
                                 <td>
-                                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" class="form-horizontal">
+                                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post"
+                                          class="form-horizontal">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
                                         <div class="btn-group">
-                                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                                            <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Delete</button>
+                                            <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                                            <button onclick="return confirm('Bạn chắc chắn muốn xoá danh mục này?')"
+                                                    type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa fa-times"></i> Xoá
+                                            </button>
                                         </div>
                                     </form>
                                 </td>

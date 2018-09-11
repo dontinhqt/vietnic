@@ -23,14 +23,14 @@
         </div>
         <div class="box">
             <div class="box-body">
-                <h4> <i class="fa fa-shopping-bag"></i> Order Information</h4>
+                <h4> <i class="fa fa-shopping-bag"></i> Thông Tin Đơn Hàng</h4>
                 <table class="table">
                     <thead>
                         <tr>
-                            <td class="col-md-3">Date</td>
-                            <td class="col-md-3">Customer</td>
-                            <td class="col-md-3">Payment</td>
-                            <td class="col-md-3">Status</td>
+                            <td class="col-md-3">Ngày Đặt Hàng</td>
+                            <td class="col-md-3">Khách Hàng</td>
+                            <td class="col-md-3">Hình Thức Thanh Toán</td>
+                            <td class="col-md-3">Trạng Thái</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,14 +91,14 @@
             <div class="box">
                 @if(!$items->isEmpty())
                     <div class="box-body">
-                        <h4> <i class="fa fa-gift"></i> Items</h4>
+                        <h4> <i class="fa fa-gift"></i> Mặt Hàng</h4>
                         <table class="table">
                             <thead>
                             <th class="col-md-2">SKU</th>
-                            <th class="col-md-2">Name</th>
-                            <th class="col-md-2">Description</th>
-                            <th class="col-md-2">Quantity</th>
-                            <th class="col-md-2">Price</th>
+                            <th class="col-md-2">Tên Sản Phẩm</th>
+                            <th class="col-md-2">Mô Tả</th>
+                            <th class="col-md-2">Số Lượng</th>
+                            <th class="col-md-2">Giá</th>
                             </thead>
                             <tbody>
                             @foreach($items as $item)
@@ -152,7 +152,7 @@
             <div class="box-footer">
                 <div class="btn-group">
                     <a href="{{ route('admin.orders.index') }}" class="btn btn-default">Back</a>
-                    @if($user->hasPermission('update-order'))<a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-primary">Edit</a>@endif
+                    @if($user->hasPermission('update-order'))<a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-primary">Sửa</a>@endif
                 </div>
             </div>
         @endif

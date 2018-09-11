@@ -5,33 +5,35 @@
     <section class="content">
         @include('layouts.errors-and-messages')
         <div class="box">
-            <form action="{{ route('admin.categories.update', $category->id) }}" method="post" class="form" enctype="multipart/form-data">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="post" class="form"
+                  enctype="multipart/form-data">
                 <div class="box-body">
                     <input type="hidden" name="_method" value="put">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="parent">Parent Category</label>
+                        <label for="parent">Danh Mục Cha</label>
                         <select name="parent" id="parent" class="form-control select2">
                             @foreach($categories as $cat)
                                 @if ($category->parent_id == 0)
-                                    <option value="0"> -- ROOT -- </option>
+                                    <option value="0"> -- ROOT --</option>
                                 @else
                                     <option
                                             @if($cat->id == $category->parent_id)
-                                                selected="selected"
+                                            selected="selected"
                                             @endif
-                                                value="{{$cat->id}}">{{$cat->name}}
+                                            value="{{$cat->id}}">{{$cat->name}}
                                     </option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{!! $category->name ?: old('name')  !!}">
+                        <label for="name">Tên Danh Mục <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" placeholder="Name" class="form-control"
+                               value="{!! $category->name ?: old('name')  !!}">
                     </div>
                     <div class="form-group">
-                        <label for="status">Status </label>
+                        <label for="status">Trạng Thái </label>
                         <select name="status" id="status" class="form-control">
                             <option value="0" @if($category->status == 0) selected="selected" @endif>Disable</option>
                             <option value="1" @if($category->status == 1) selected="selected" @endif>Enable</option>
@@ -41,8 +43,8 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.categories.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('admin.categories.index') }}" class="btn btn-default">Quay Lại</a>
+                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
                     </div>
                 </div>
             </form>

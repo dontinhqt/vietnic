@@ -17,12 +17,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Name <span class="text-danger">*</span></label>
+                    <label for="name">Tên Sản Phẩm <span class="text-danger">*</span></label>
                     <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{!! $product->name !!}">
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description </label>
+                    <label for="description">Mô Tả </label>
                     <textarea class="form-control ckeditor" name="description" id="description" rows="5" placeholder="Description">{!! $product->description  !!}</textarea>
                 </div>
 
@@ -35,17 +35,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Image </label>
+                    <label for="image">Hình Ảnh </label>
                     <input type="file" name="image" id="image" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="quantity">Quantity <span class="text-danger">*</span></label>
+                    <label for="quantity">Số Lượng <span class="text-danger">*</span></label>
                     <input type="text" name="quantity" id="quantity" placeholder="Quantity" class="form-control" value="{!! $product->quantity !!}">
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Price <span class="text-danger">*</span></label>
+                    <label for="price">Giá <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-addon">VND</span>
                         <input type="text" name="price" id="price" placeholder="Price" class="form-control" value="{!! $product->price !!}">
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="sale_price">Sale Price</label>
+                    <label for="sale_price">Giá Đã Giảm</label>
                     <div class="input-group">
                         <span class="input-group-addon">VND</span>
                         <input type="text" name="sale_price" id="sale_price" placeholder="Sale Price" class="form-control" value="{{ $product->sale_price }}">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category_id">Categories</label>
+                    <label for="category_id">Phân Loại </label>
                     <select name="category_id" id="category_id" class="form-control select2">
                         {{ categorySelect($categories, 0, " ", $product->category_id) }}
                     </select>
@@ -69,7 +69,7 @@
 
                 @if(!$brands->isEmpty())
                 <div class="form-group">
-                    <label for="brand_id">Brand </label>
+                    <label for="brand_id">Hãng Sản Xuất </label>
                     <select name="brand_id" id="brand_id" class="form-control select2">
                         <option value=""></option>
                         @foreach($brands as $brand)
@@ -86,8 +86,8 @@
             </div>
             <div class="box-footer">
                 <div class="btn-group">
-                    <a href="{{ route('admin.products.index') }}" class="btn btn-default btn-sm">Back</a>
-                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    <a href="{{ route('admin.products.index') }}" class="btn btn-default btn-sm">Quay Lại</a>
+                    <button type="submit" class="btn btn-primary btn-sm">Cập Nhật</button>
                 </div>
             </div>
         </form>

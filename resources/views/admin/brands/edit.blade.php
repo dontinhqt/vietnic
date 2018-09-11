@@ -11,14 +11,14 @@
                     <input type="hidden" name="_method" value="put">
                     <div class="form-group">
                         <label for="name">Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ $brand->name }}">
+                        <input type="text" name="name" id="name" placeholder="Tên HSX" class="form-control" value="{{ $brand->name }}">
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.brands.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('admin.brands.index') }}" class="btn btn-default">Quay Lại</a>
+                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
                     </div>
                 </div>
             </form>

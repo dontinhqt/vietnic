@@ -9,15 +9,16 @@
                 <div class="box-body">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="name">Name <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" placeholder="Name" class="form-control" value="{{ old('name') }}">
+                        <label for="name">Tên Hãng Sản Xuất <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" placeholder="Tên HSX" class="form-control"
+                               value="{{ old('name') }}">
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="btn-group">
-                        <a href="{{ route('admin.brands.index') }}" class="btn btn-default">Back</a>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{ route('admin.brands.index') }}" class="btn btn-default">Quay Lại</a>
+                        <button type="submit" class="btn btn-primary">Thêm Mới HSX</button>
                     </div>
                 </div>
             </form>
