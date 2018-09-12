@@ -22,9 +22,9 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('quantity');
             $table->float('price');
-            $table->float('sale_price');
+            $table->float('sale_price')->nullable();
             $table->integer('category_id');
-            $table->integer('brand_id');
+            $table->integer('brand_id')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

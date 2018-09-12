@@ -16,7 +16,7 @@ class Product extends Model implements Buyable
     use SearchableTrait;
 
     const STATUS_PRODUCT_ENABLE = 1;
-    const LIMIT_PRODUCT = 16;
+    const PRODUCT_LIMIT = 16;
 
     public const MASS_UNIT = [
         'OUNCES' => 'oz',

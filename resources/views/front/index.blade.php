@@ -12,12 +12,14 @@
     <section class="new-product t100 home">
         <div class="container">
             <div class="section-title b50">
-                <h2> List new product </h2>
+                <h2> Sản Phẩm Mới </h2>
             </div>
             @include('front.products.product-list', ['products' => $products])
         </div>
     </section>
+
     <hr>
+
     {{-- @if($cat2->products->isNotEmpty())
         <div class="container">
             <div class="section-title b100">
