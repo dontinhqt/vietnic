@@ -1,0 +1,29 @@
+/*********************************
+3. Header
+*********************************/
+
+.header
+{
+    position: relative;
+    width: 100%;
+    z-index: 10;
+}
+.align-items-center {
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+.justify-content-start {
+    -ms-flex-pack: start!important;
+    justify-content: flex-start!important;
+}
+.flex-row {
+    -ms-flex-direction: row!important;
+    flex-direction: row!important;
+}
+.d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+.ml-auto, .mx-auto {
+    margin-left: auto!important;
+}

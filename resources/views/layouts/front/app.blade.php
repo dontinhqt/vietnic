@@ -20,6 +20,8 @@
     <meta name="author" content="Jeff Simons Decena">
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/blog_styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/blog_responsive.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,53 +59,174 @@
         <a href="https://www.enable-javascript.com/" target="_blank">Read more</a>
     </p>
 </noscript>
-<section>
-    <div class="row hidden-xs">
-        <div class="container">
-            <div class="clearfix"></div>
-            <div class="pull-right">
-                <ul class="nav navbar-nav navbar-right">
-                    @if(auth()->check())
-                        <li><a href="{{ route('accounts', ['tab' => 'profile']) }}"><i class="fa fa-home"></i> My Account</a></li>
-                        <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-                    @else
-                        <li><a href="{{ route('login') }}"> <i class="fa fa-lock"></i> Login</a></li>
-                        <li><a href="{{ route('register') }}"> <i class="fa fa-sign-in"></i> Register</a></li>
-                    @endif
-                    <li id="cart" class="menubar-cart">
-                        <a href="{{ route('cart.index') }}" title="View Cart" class="awemenu-icon menu-shopping-cart">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span class="cart-number">{{ $cartCount }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <header id="header-section">
-        <nav class="navbar navbar-default">
+<div class="super_container">
+
+    <header class="header">
+        
+        <div class="row hidden-xs">
             <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header col-md-2">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+                <div class="clearfix"></div>
+                <div class="pull-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        @if(auth()->check())
+                            <li><a href="{{ route('accounts', ['tab' => 'profile']) }}"><i class="fa fa-home"></i> Tài khoản</a></li>
+                            <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}"> <i class="fa fa-lock"></i> Đăng nhập</a></li>
+                            <li><a href="{{ route('register') }}"> <i class="fa fa-sign-in"></i> Đăng kí</a></li>
+                        @endif
+                        <li id="cart" class="menubar-cart">
+                            <a href="{{ route('cart.index') }}" title="View Cart" class="awemenu-icon menu-shopping-cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <span class="cart-number">{{ $cartCount }}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-10">
-                    @include('layouts.front.header-cart')
+            </div>
+        </div>    
+
+        <div id="header-section">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header col-md-2">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name') }}</a>
+                    </div>
+                    <div class="col-md-10">
+                        @include('layouts.front.header-cart')
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        
+                        <div class="main_nav_content d-flex flex-row">
+
+                            <!-- Categories Menu -->
+
+                            <div class="cat_menu_container">
+                                <div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+                                    <div class="cat_burger"><span></span><span></span><span></span></div>
+                                    <div class="cat_menu_text">categories</div>
+                                </div>
+
+                                <ul class="cat_menu">
+                                    <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
+                                    <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
+                                    <li class="hassubs">
+                                        <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
+                                        <ul>
+                                            <li class="hassubs">
+                                                <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Main Nav Menu -->
+
+                            <div class="main_nav_menu ml-auto">
+                                <ul class="standard_dropdown main_nav_dropdown">
+                                    <li><a href="index.html">Home<i class="fas fa-chevron-down"></i></a></li>
+                                    <li class="hassubs">
+                                        <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hassubs">
+                                        <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
+                                                <ul>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="hassubs">
+                                        <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                            <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Menu Trigger -->
+
+                            <div class="menu_trigger_container ml-auto">
+                                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                    <div class="menu_burger">
+                                        <div class="menu_trigger_text">menu</div>
+                                        <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
+
     </header>
-</section>
-@yield('content')
+    @yield('content')
 
-@include('layouts.front.footer')
-
+    @include('layouts.front.footer')
+</div>
 <script src="{{ asset('js/front.min.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 @yield('js')
