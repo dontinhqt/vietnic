@@ -47,6 +47,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $this->all($columns, $order, $sort);
     }
 
+    public function listProductsWithCondition(string $order = 'id', string $sort = 'desc')
+    {
+        return $this->model
+            ->orderBy($order, $sort)
+            ->where('status', Product::STATUS_PRODUCT_ENABLE)
+            ->limit(Product::PRODUCT_LIMIT)
+            ->get();
+    }    
+
     /**
      * Create the product
      *
